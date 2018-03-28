@@ -7,15 +7,15 @@
         <mat-table #table [dataSource]="dataSource">
 
             <!-- Name Column -->
-            <ng-container matColumnDef="name">
+            <ng-container matColumnDef="time">
                 <mat-header-cell *matHeaderCellDef> Tijd </mat-header-cell>
-                <mat-cell *matCellDef="let Data"> {{Data.name}} </mat-cell>
+                <mat-cell *matCellDef="let SensorData"> {{SensorData.timestamp * 1000 | date}} </mat-cell>
             </ng-container>
 
             <!-- Value Column -->
-            <ng-container matColumnDef="value">
-                <mat-header-cell *matHeaderCellDef> Meterstand </mat-header-cell>
-                <mat-cell *matCellDef="let Data"> {{Data.value}} </mat-cell>
+            <ng-container matColumnDef="data">
+                <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
+                <mat-cell *matCellDef="let SensorData"> {{SensorData.data}} </mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
