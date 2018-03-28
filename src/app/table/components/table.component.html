@@ -9,7 +9,7 @@
             <!-- Name Column -->
             <ng-container matColumnDef="time">
                 <mat-header-cell *matHeaderCellDef> Tijd </mat-header-cell>
-                <mat-cell *matCellDef="let SensorData"> {{SensorData.timestamp * 1000 | date}} </mat-cell>
+                <mat-cell *matCellDef="let SensorData"> {{SensorData.timestamp | date: 'dd/MM/yyyy hh:MM:ss'}} </mat-cell>
             </ng-container>
 
             <!-- Value Column -->
