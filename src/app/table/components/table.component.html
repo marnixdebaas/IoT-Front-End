@@ -1,0 +1,25 @@
+<app-top-nav-bar [active]="2"></app-top-nav-bar>
+<div class="panel panel-body" style="padding-left: 50px;padding-right: 50px;">
+    <div class="modal-title">
+        <h3>Tabel</h3>
+    </div>
+    <div class="panel-body">
+        <mat-table #table [dataSource]="dataSource">
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef> Tijd </mat-header-cell>
+                <mat-cell *matCellDef="let Data"> {{Data.name}} </mat-cell>
+            </ng-container>
+
+            <!-- Value Column -->
+            <ng-container matColumnDef="value">
+                <mat-header-cell *matHeaderCellDef> Meterstand </mat-header-cell>
+                <mat-cell *matCellDef="let Data"> {{Data.value}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </div>
+</div>

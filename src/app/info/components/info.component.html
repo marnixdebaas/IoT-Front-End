@@ -1,0 +1,35 @@
+<app-top-nav-bar [active]="3" ></app-top-nav-bar>
+<!--The content of tab 2-->
+<div class="panel panel-default" style="padding-left: 50px;padding-right: 50px;">
+    <div class="modal-title">
+        <h3>Info</h3>
+    </div>
+    <div class="panel-body">
+        <form class="example-form">
+            <div class="classcss">
+                <mat-form-field class="example-full-width">
+                    <label>Name: </label>
+                    <input matInput [value]="user.name">
+                </mat-form-field>
+            </div>
+            <div class="classcss">
+                <mat-form-field class="example-full-width">
+                    <label>Gender: </label>
+                    <input matInput [value]="user.gender">
+                </mat-form-field>
+            </div>
+            <div class="classcss">
+                <mat-form-field class="example-full-width">
+                    <label>City: </label>
+                    <input matInput [value]="user.city">
+                </mat-form-field>
+            </div>
+            <div class="classcss">
+                <mat-form-field class="example-full-width">
+                    <label>Phone: </label>
+                    <input matInput [value]="user.phone">
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+</div>

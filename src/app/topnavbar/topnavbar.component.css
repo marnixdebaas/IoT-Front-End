@@ -1,0 +1,14 @@
+.action-buttons {
+    position: absolute;
+    right: 60px;
+    height: 35px;
+    z-index: 99999;
+    top: 40px;
+    transform: translate3d(0,0,0);
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    background-color: #E91E63;
+}
