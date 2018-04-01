@@ -30,8 +30,20 @@ export class LoginComponent implements OnInit {
         if ( username === this.username && password === this.password ) {
             this.route.navigate(['graphs']);
         } else {
-            console.log('error');
+           const user = document.getElementById('user');
+           const pass = document.getElementById('pass');
+           user.style.color = 'red';
+           pass.style.color = 'red';
         }
+    }
+
+    changeUserInput() {
+      const user = document.getElementById('user');
+      user.style.color = 'white';
+    }
+    changePassInput() {
+      const pass = document.getElementById('pass');
+      pass.style.color = 'white';
     }
 
 }

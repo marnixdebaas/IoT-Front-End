@@ -11,6 +11,10 @@
     border: none;
 }
 
+/deep/ .mat-input-underline {
+  border-bottom: 1px solid white;
+}
+
 .transparent{
   background-color: rgba(0,0,0,0.4);
 }

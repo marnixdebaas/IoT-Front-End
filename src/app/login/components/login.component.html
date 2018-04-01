@@ -2,32 +2,32 @@
     <div class="container">
         <form (submit)="loginClicked($event)" >
            <div class="row">
-              <div class="col-md-2"></div>
-                  <div class="col-md-8">
-                      <div class="panel transparent" align="center">
-                          <div class="modal-title">
-                              <h3> Login</h3>
+              <div class="col-md-3"></div>
+              <div class="col-md-6">
+                  <div class="panel transparent" align="center">
+                      <div class="modal-title">
+                          <h3> Login</h3>
+                      </div>
+                      <div class="">
+                          <div class="row">
+                              <mat-form-field class="example-full-width"  (keyup)="changeUserInput()">
+                                  <label><i id="user" class="fa fa-user" aria-hidden="true"> </i>&nbsp;&nbsp; Username   </label>
+                                  <input matInput type="text" name="username" [(ngModel)]="username">
+                              </mat-form-field>
                           </div>
-                          <div class="">
-                              <div class="row">
-                                  <mat-form-field class="example-full-width">
-                                      <label><i class="fa fa-user" aria-hidden="true"> </i>&nbsp;&nbsp; Username   </label>
-                                      <input matInput type="text" name="username" [(ngModel)]="username">
-                                  </mat-form-field>
-                              </div>
-                              <div class="row">
-                                  <mat-form-field class="example-full-width transparant">
-                                      <label><i class="fa fa-key" aria-hidden="true"> </i>&nbsp;&nbsp; Password</label>
-                                      <input matInput type="password" name="password" [(ngModel)]="password">
-                                  </mat-form-field>
-                              </div>
-                          </div>
-                          <div class="modal-footer center-items" align="center">
-                              <button class="btn btn-primary" type="submit"><i class="fa fa-check" aria-hidden="true"></i> Login</button>
+                          <div class="row">
+                            <mat-form-field class="example-full-width" (keydown)="changePassInput()">
+                              <label><i id="pass" class="fa fa-key" aria-hidden="true"> </i>&nbsp;&nbsp; Password</label>
+                              <input matInput type="password" name="password" [(ngModel)]="password">
+                            </mat-form-field>
                           </div>
                       </div>
+                      <div class="modal-footer center-items" align="center">
+                          <button class="btn btn-primary" type="submit"><i class="fa fa-check" aria-hidden="true"> </i> Login</button>
+                      </div>
                   </div>
-                  <div class="col-md-2"></div>
+              </div>
+              <div class="col-md-3"></div>
              </div>
         </form>
         <video playsinline autoplay loop muted id="video-background">
