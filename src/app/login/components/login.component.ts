@@ -25,15 +25,20 @@ export class LoginComponent implements OnInit {
     }
 
     loginClicked($event) {
-        const password = localStorage.getItem('password').toString();
+      const user = document.getElementById('user');
+      const pass = document.getElementById('pass');
+
+      const password = localStorage.getItem('password').toString();
         const username = localStorage.getItem('username').toString();
         if ( username === this.username && password === this.password ) {
             this.route.navigate(['graphs']);
+        } else if (username === this.username) {
+          pass.style.color = 'red';
+        } else if (password === this.password) {
+          user.style.color = 'red';
         } else {
-           const user = document.getElementById('user');
-           const pass = document.getElementById('pass');
-           user.style.color = 'red';
-           pass.style.color = 'red';
+          user.style.color = 'red';
+          pass.style.color = 'red';
         }
     }
 
