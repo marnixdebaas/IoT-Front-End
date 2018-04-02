@@ -15,18 +15,16 @@ export class TableComponent implements OnInit {
     // line, area
     public autoScale = true;
     public dataSource: SensorData[];
-
     //
     constructor(private apiService: AppService) {
         Object.assign(this, {single, standdata, datausage, tableData});
     }
 
     ngOnInit() {
-        //
         this.dataSource = [];
-        debugger;
+        //debugger;
         this.apiService.getAllSensorData().subscribe((data: any) => {
-            debugger;
+           // debugger;
             // Formatting weird timestamp date to normal angular date
             this.dataSource = data.response;
             let i: number;
@@ -34,6 +32,7 @@ export class TableComponent implements OnInit {
                 this.dataSource[i].timestamp = new Date(this.dataSource[i].timestamp)
             }
         });
+        console.log(this.dataSource)
     }
 
 }
