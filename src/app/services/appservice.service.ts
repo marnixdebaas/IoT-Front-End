@@ -27,9 +27,22 @@ export class AppService {
 
     public getAllSensorData(): Observable<SensorData[]> {
         let sensorData: SensorData[] = [];
+        /*this.http.get('http://' + this.apiUrl + '/sensor/getAllSensorData').subscribe((data: any) => {
+            debugger;
+            sensorData = data;
+            return sensorData;
+        })*/
 
         return this.http.get('http://' + this.apiUrl + '/sensor/getAllSensorData').map((res: SensorData[]) => res);
     }
+    public getBetweenDates(date1, date2): Observable<SensorData[]> {
+        let sensorData: SensorData[] = [];
+        this.http.get('http://' + this.apiUrl + '/sensor/getBetweenDates/' + date1 + '/' + date2).subscribe((data: any) => {
+            sensorData = data;
+      });
+        return null;
+    }
+
 
     public getUser(): Observable<User> {
         let user: User;
