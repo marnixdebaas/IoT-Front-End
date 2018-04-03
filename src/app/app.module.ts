@@ -8,7 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app.routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatTableModule, MatTabsModule, MatInputModule } from '@angular/material';
+import { MatTableModule, MatTabsModule, MatInputModule, MatIconModule, MatNativeDateModule } from '@angular/material';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { GraphComponent } from './graphs/components/graph.component';
 import { TableComponent } from './table/components/table.component';
@@ -28,6 +29,9 @@ import { AppService } from './services/appservice.service';
   ],
   imports: [
     BrowserModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule,
     MatTabsModule,
     MatInputModule,
     CommonModule,
