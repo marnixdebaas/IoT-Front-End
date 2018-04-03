@@ -36,4 +36,11 @@ export class AppService {
 
         return this.http.get('http://' + this.apiUrl + '/sensor/getAllSensorData').map((res: SensorData[]) => res);
     }
+
+    public getUser(): Observable<User> {
+        let user: User;
+
+
+        return this.http.get('http://' + this.apiUrl + '/sensor/getUser').map((res: User) => res);
+    }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from '../../services/appservice.service';
+import { User } from '../../users/classes/user.class';
 
 @Component({
   selector: 'app-login-component',
@@ -12,6 +13,7 @@ export class LoginComponent implements OnInit {
 
     public username: string;
     public password: string;
+    public user: User;
 
     //
     constructor(private route: Router, private apiService: AppService) {
@@ -22,6 +24,11 @@ export class LoginComponent implements OnInit {
         this.username = '';
         this.password = '';
         this.apiService.getUsers();
+        this.apiService.getUser().subscribe((data: any) => {
+            debugger;
+            // Formatting weird timestamp date to normal angular date
+            this.user = data.response;
+        });
     }
 
     loginClicked($event) {
@@ -40,6 +47,18 @@ export class LoginComponent implements OnInit {
           user.style.color = 'red';
           pass.style.color = 'red';
         }
+
+        /*
+        if( this.user.username == this.username && this.user.password === this.password ) {
+            this.route.navigate(['graphs']);
+        } else if (this.user.username === this.username) {
+          pass.style.color = 'red';
+        } else if (this.user.password === this.password) {
+          user.style.color = 'red';
+        } else {
+          user.style.color = 'red';
+          pass.style.color = 'red';
+        }*/
     }
 
     changeUserInput() {
