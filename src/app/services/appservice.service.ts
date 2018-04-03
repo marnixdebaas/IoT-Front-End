@@ -20,7 +20,6 @@ export class AppService {
     public getUsers() {
         let users: User[] = [];
         this.http.get('http://' + this.apiUrl + '/sensor/getUsers').subscribe((data: any) => {
-            debugger;
             users = data;
             return users;
         });
@@ -28,18 +27,12 @@ export class AppService {
 
     public getAllSensorData(): Observable<SensorData[]> {
         let sensorData: SensorData[] = [];
-        /*this.http.get('http://' + this.apiUrl + '/sensor/getAllSensorData').subscribe((data: any) => {
-            debugger;
-            sensorData = data;
-            return sensorData;
-        })*/
 
         return this.http.get('http://' + this.apiUrl + '/sensor/getAllSensorData').map((res: SensorData[]) => res);
     }
 
     public getUser(): Observable<User> {
         let user: User;
-
 
         return this.http.get('http://' + this.apiUrl + '/sensor/getUser').map((res: User) => res);
     }

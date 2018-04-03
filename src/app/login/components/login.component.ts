@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
         this.username = '';
         this.password = '';
-        this.apiService.getUsers();
+        //this.apiService.getUsers();
         this.apiService.getUser().subscribe((data: any) => {
             // Formatting weird timestamp date to normal angular date
             this.user.username = data.Name;
