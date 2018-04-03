@@ -21,20 +21,21 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.user = new User();
         this.username = '';
         this.password = '';
         //this.apiService.getUsers();
         this.apiService.getUser().subscribe((data: any) => {
             // Formatting weird timestamp date to normal angular date
-            this.user.username = data.Name;
-            this.user.password = data.Password;
+            this.user.username = data.response[0].Name;
+            this.user.password = data.response[0].Password;
         });
     }
 
     loginClicked($event) {
         const user = document.getElementById('user');
         const pass = document.getElementById('pass');
-        if( this.user.username == this.username && this.user.password === this.password ) {
+        if( this.user.username === this.username && this.user.password === this.password ) {
             this.route.navigate(['graphs']);
         } else if (this.user.username === this.username) {
             pass.style.color = 'red';
