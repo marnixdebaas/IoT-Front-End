@@ -25,40 +25,25 @@ export class LoginComponent implements OnInit {
         this.password = '';
         this.apiService.getUsers();
         this.apiService.getUser().subscribe((data: any) => {
-            debugger;
             // Formatting weird timestamp date to normal angular date
-            this.user = data.response;
+            this.user.username = data.Name;
+            this.user.password = data.Password;
         });
     }
 
     loginClicked($event) {
-      const user = document.getElementById('user');
-      const pass = document.getElementById('pass');
-
-      const password = localStorage.getItem('password').toString();
-        const username = localStorage.getItem('username').toString();
-        if ( username === this.username && password === this.password ) {
-            this.route.navigate(['graphs']);
-        } else if (username === this.username) {
-          pass.style.color = 'red';
-        } else if (password === this.password) {
-          user.style.color = 'red';
-        } else {
-          user.style.color = 'red';
-          pass.style.color = 'red';
-        }
-
-        /*
+        const user = document.getElementById('user');
+        const pass = document.getElementById('pass');
         if( this.user.username == this.username && this.user.password === this.password ) {
             this.route.navigate(['graphs']);
         } else if (this.user.username === this.username) {
-          pass.style.color = 'red';
+            pass.style.color = 'red';
         } else if (this.user.password === this.password) {
-          user.style.color = 'red';
+            user.style.color = 'red';
         } else {
-          user.style.color = 'red';
-          pass.style.color = 'red';
-        }*/
+            user.style.color = 'red';
+            pass.style.color = 'red';
+        }
     }
 
     changeUserInput() {
