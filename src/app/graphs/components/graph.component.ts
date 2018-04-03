@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { single, standdata, datausage, tableData } from '../../data';
 import { TopNavBarComponent } from '../../topnavbar/topnavbar.component';
+import { AppService } from '../../services/appservice.service';
+import { SensorData } from '../../sensordata/classes/sensordata.class';
 import { User } from '../../user.class';
 import { Data } from '../../data.interface';
 
@@ -27,8 +29,11 @@ export class GraphComponent implements OnInit {
     public showYAxisLabel: boolean;
     public yAxisLabel: string;
     public colorScheme: any;
+    public fromDate: Date;
+    public toDate: Date;
+    public graphData: SensorData[];
     // The Constructor
-    constructor() {
+    constructor(public apiService: AppService) {
         this.single = single;
         this.standdata = standdata;
         this.datausage = datausage;
@@ -49,5 +54,25 @@ export class GraphComponent implements OnInit {
             domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
         };
         this.view = [700, 400];
+        this.graphData = [];
+    }
+
+    sendRequest($event) {
+        debugger;
+        var fromDate: string = this.fromDate.toString();
+        var toDate: string = this.toDate.toString();
+        var dateDifference: number = Date.parse(toDate) - Date.parse(fromDate);
+        let diffInHours: number = dateDifference / 1000 / 60 / 60;
+        console.log(diffInHours);
+
+        if(diffInHours < 0) {
+            return;
+        } else {
+            this.apiService.getBetweenDates(this.fromDate, this.toDate, diffInHours).subscribe((data: any) => {
+                // Formatting weird timestamp date to normal angular date
+                debugger;
+                this.graphData = data;
+            });   
+        }
     }
 }
