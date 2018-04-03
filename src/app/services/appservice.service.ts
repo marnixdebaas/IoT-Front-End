@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
 export class AppService {
     public user: User;
     public headers: any;
-    public apiUrl: string = '37.97.180.203:1833';
+    public apiUrl: string = 'localhost:1833';
 
     //
     constructor(private http: HttpClient) {

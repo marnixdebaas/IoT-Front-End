@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { single, standdata, datausage, tableData } from '../../data';
 import { TopNavBarComponent } from '../../topnavbar/topnavbar.component';
 import { AppService } from '../../services/appservice.service';
@@ -32,8 +32,9 @@ export class GraphComponent implements OnInit {
     public fromDate: Date;
     public toDate: Date;
     public graphData: SensorData[];
+    public isVisible: boolean;
     // The Constructor
-    constructor(public apiService: AppService) {
+    constructor(public apiService: AppService, private cdr: ChangeDetectorRef) {
         this.single = single;
         this.standdata = standdata;
         this.datausage = datausage;
@@ -43,6 +44,7 @@ export class GraphComponent implements OnInit {
     // On initalisation
     ngOnInit() {
         this.showXAxis = true;
+        this.isVisible = false;
         this.showYAxis = true;
         this.gradient = false;
         this.showLegend = true;
@@ -53,7 +55,7 @@ export class GraphComponent implements OnInit {
         this.colorScheme = {
             domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
         };
-        this.view = [700, 400];
+        this.view = [1400, 400];
         this.graphData = [];
     }
 
@@ -71,8 +73,10 @@ export class GraphComponent implements OnInit {
             this.apiService.getBetweenDates(this.fromDate, this.toDate, diffInHours).subscribe((data: any) => {
                 // Formatting weird timestamp date to normal angular date
                 debugger;
-                this.graphData = data;
-            });   
+                this.graphData = data.response;
+                this.cdr.detectChanges();
+                this.isVisible = true;
+            });
         }
     }
 }

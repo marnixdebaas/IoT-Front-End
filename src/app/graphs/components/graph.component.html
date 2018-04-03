@@ -6,7 +6,7 @@
     <div class="panel-body">
         <div style="padding-left: 50px;padding-right: 50px;">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <h2>Grafiek meterstand</h2>
                     <mat-form-field class="example-full-width">
                         <input [(ngModel)]="fromDate" matInput [matDatepicker]="picker" placeholder="From date" readonly="true">
@@ -22,19 +22,12 @@
                     </mat-form-field>
                     <button class="btn btn-primary" (click)="sendRequest($event)">Filter data</button>
                 </div>
-                <div class="col-md-6">
-                    <div class="col-md-2">
-                    </div>
-                    <div class="col-md-10">
-                        <h2>Grafiek verbruik</h2>
-                    </div>
-                </div>
             </div>
-            <div style="float:left; margin-right: 0px; background-color: #ffffff;">
+            <div style="float:left; margin-right: 0px; background-color: #ffffff;" *ngIf="isVisible">
                 <ngx-charts-line-chart
                     [view]="view"
                     [scheme]="colorScheme"
-                    [results]="standdata"
+                    [results]="graphData"
                     [gradient]="gradient"
                     [xAxis]="showXAxis"
                     [yAxis]="showYAxis"
@@ -46,22 +39,7 @@
                     [autoScale]="autoScale">
                 </ngx-charts-line-chart>
             </div>
-            <div style="float:right; margin-left: 0px; background-color: #ffffff;">
-                <ngx-charts-line-chart
-                    [view]="view"
-                    [scheme]="colorScheme"
-                    [results]="datausage"
-                    [gradient]="gradient"
-                    [xAxis]="showXAxis"
-                    [yAxis]="showYAxis"
-                    [legend]="showLegend"
-                    [showXAxisLabel]="showXAxisLabel"
-                    [showYAxisLabel]="showYAxisLabel"
-                    [xAxisLabel]="xAxisLabel"
-                    [yAxisLabel]="yAxisLabel"
-                    [autoScale]="autoScale">
-                </ngx-charts-line-chart>
-            </div>
+
         </div>
     </div>
 </div>
