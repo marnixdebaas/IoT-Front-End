@@ -24,9 +24,7 @@ export class TableComponent implements OnInit {
     ngOnInit() {
         //
         this.dataSource = [];
-        debugger;
         this.apiService.getAllSensorData().subscribe((data: any) => {
-            debugger;
             // Formatting weird timestamp date to normal angular date
             this.dataSource = data.response;
             let i: number;
