@@ -5,6 +5,8 @@ import { AppService } from '../../services/appservice.service';
 import { SensorData } from '../../sensordata/classes/sensordata.class';
 import { User } from '../../user.class';
 import { Data } from '../../data.interface';
+import {forEach} from '@angular/router/src/utils/collection';
+import moment = require('moment');
 
 @Component({
   selector: 'app-graph-component',
@@ -32,6 +34,8 @@ export class GraphComponent implements OnInit {
     public fromDate: Date;
     public toDate: Date;
     public graphData: SensorData[];
+    public graphDataAll: SensorData[];
+    public kWhAll: number;
     public isVisible: boolean;
     // The Constructor
     constructor(public apiService: AppService, private cdr: ChangeDetectorRef) {
@@ -55,12 +59,27 @@ export class GraphComponent implements OnInit {
         this.colorScheme = {
             domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
         };
-        this.view = [1400, 400];
+        this.view = [700, 500];
         this.graphData = [];
+        this.graphDataAll = [];
+
+
+        const firstDate = new Date('2018-03-29 11:57:52.374').toDateString();
+        const lastDate = new Date().toDateString();
+        var dateDifference: number = Date.parse(lastDate) - Date.parse(firstDate);
+        let diffInHours: number = dateDifference / 1000 / 60 / 60;
+        this.apiService.getBetweenDates(firstDate,lastDate, diffInHours).subscribe((data: any) => {
+          // Formatting weird timestamp date to normal angular date
+          this.graphDataAll = data.response;
+          for (var d = 0; d < this.graphDataAll[0].series.length; d ++) {
+            this.graphDataAll[0].series[d].name = moment(this.graphDataAll[0].series[d].name).format('MM/DD/YYYY H:mm');
+          }
+          this.cdr.detectChanges();
+          this.kWhAll = this.graphDataAll[0].series[4].value;
+        });
     }
 
     sendRequest($event) {
-        debugger;
         var fromDate: string = this.fromDate.toString();
         var toDate: string = this.toDate.toString();
         var dateDifference: number = Date.parse(toDate) - Date.parse(fromDate);
@@ -72,8 +91,10 @@ export class GraphComponent implements OnInit {
         } else {
             this.apiService.getBetweenDates(this.fromDate, this.toDate, diffInHours).subscribe((data: any) => {
                 // Formatting weird timestamp date to normal angular date
-                debugger;
-                this.graphData = data.response;
+                this.graphData = data.response
+                for (var d = 0; d < this.graphData[0].series.length; d ++) {
+                    this.graphData[0].series[d].name = moment(this.graphData[0].series[d].name).format('MM/DD/YYYY H:mm');
+                }
                 this.cdr.detectChanges();
                 this.isVisible = true;
             });

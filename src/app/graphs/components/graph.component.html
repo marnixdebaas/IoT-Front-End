@@ -6,8 +6,27 @@
     <div class="panel-body">
         <div style="padding-left: 50px;padding-right: 50px;">
             <div class="row">
-                <div class="col-md-12">
-                    <h2>Grafiek meterstand</h2>
+              <div class="col-md-6 border">
+                <h2>Totaal verbruik {{kWhAll}} kWh  <i id="user" class="fa fa-info fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="test"> </i></h2>
+                <div style="float:left; margin-right: 0px; background-color: #ffffff;">
+                  <ngx-charts-line-chart
+                    [view]="view"
+                    [scheme]="colorScheme"
+                    [results]="graphDataAll"
+                    [gradient]="gradient"
+                    [xAxis]="showXAxis"
+                    [yAxis]="showYAxis"
+                    [legend]="showLegend"
+                    [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel"
+                    [xAxisLabel]="xAxisLabel"
+                    [yAxisLabel]="yAxisLabel"
+                    [autoScale]="autoScale">
+                  </ngx-charts-line-chart>
+                </div>
+              </div>
+                <div class="col-md-6 border">
+                    <h2>Filter gebruik op datum</h2>
                     <mat-form-field class="example-full-width">
                         <input [(ngModel)]="fromDate" matInput [matDatepicker]="picker" placeholder="From date" readonly="true">
                         <mat-datepicker-toggle matSuffix [for]="picker">
@@ -21,25 +40,24 @@
                         <mat-datepicker #picker2></mat-datepicker>
                     </mat-form-field>
                     <button class="btn btn-primary" (click)="sendRequest($event)">Filter data</button>
+                  <div style="float:left; margin-right: 0px; background-color: #ffffff;">
+                    <ngx-charts-line-chart
+                      [view]="view"
+                      [scheme]="colorScheme"
+                      [results]="graphData"
+                      [gradient]="gradient"
+                      [xAxis]="showXAxis"
+                      [yAxis]="showYAxis"
+                      [legend]="showLegend"
+                      [showXAxisLabel]="showXAxisLabel"
+                      [showYAxisLabel]="showYAxisLabel"
+                      [xAxisLabel]="xAxisLabel"
+                      [yAxisLabel]="yAxisLabel"
+                      [autoScale]="autoScale">
+                    </ngx-charts-line-chart>
+                  </div>
                 </div>
+              </div>
             </div>
-            <div style="float:left; margin-right: 0px; background-color: #ffffff;" *ngIf="isVisible">
-                <ngx-charts-line-chart
-                    [view]="view"
-                    [scheme]="colorScheme"
-                    [results]="graphData"
-                    [gradient]="gradient"
-                    [xAxis]="showXAxis"
-                    [yAxis]="showYAxis"
-                    [legend]="showLegend"
-                    [showXAxisLabel]="showXAxisLabel"
-                    [showYAxisLabel]="showYAxisLabel"
-                    [xAxisLabel]="xAxisLabel"
-                    [yAxisLabel]="yAxisLabel"
-                    [autoScale]="autoScale">
-                </ngx-charts-line-chart>
-            </div>
-
-        </div>
     </div>
 </div>
