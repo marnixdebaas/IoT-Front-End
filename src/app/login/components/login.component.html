@@ -5,31 +5,64 @@
               <div class="col-md-3">
               </div>
               <div class="col-md-6">
-                  <div class="panel transparent border" align="center">
-                      <div class="modal-title">
-                          <h3> Login</h3>
+                  <div class="panel transparent border" align="center" *ngIf="userToggle == false">
+                      <div class="row">
+                          <div class="modal-title">
+                            <h3> Login</h3>
+                          </div>
                       </div>
                       <div>
                           <div class="row">
                               <mat-form-field class="example-full-width"  (keyup)="changeUserInput()">
-                                  <label><i id="user" class="fa fa-user" aria-hidden="true"> </i>&nbsp;&nbsp; Username   </label>
+                                  <label><i id="user" class="fa fa-user fa-lg" aria-hidden="true"> </i>&nbsp;&nbsp; Gebruikersnaam   </label>
                                   <input matInput type="text" name="username" [(ngModel)]="username">
                               </mat-form-field>
                           </div>
                           <div class="row">
                             <mat-form-field class="example-full-width" (keydown)="changePassInput()">
-                              <label><i id="pass" class="fa fa-key" aria-hidden="true"> </i>&nbsp;&nbsp; Password</label>
+                              <label><i id="pass" class="fa fa-key fa-lg" aria-hidden="true"> </i>&nbsp;&nbsp; Wachtwoord </label>
                               <input matInput type="password" name="password" [(ngModel)]="password">
                             </mat-form-field>
                           </div>
+                        <p class="color" style="padding-right: 10px;" (click)="toggleNewUser()"><i class="fa fa-plus " aria-hidden="true" > </i> Registreren</p>
                       </div>
                       <div class="modal-footer center-items" align="center">
-                          <button class="btn btn-primary" type="submit"><i class="fa fa-check" aria-hidden="true"> </i> Login</button>
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-check" aria-hidden="true"> </i> Login</button>
                       </div>
                   </div>
-              </div>
+                  <div class="panel transparent border" align="center" *ngIf="userToggle == true">
+                      <div class="row">
+                          <div class="modal-title">
+                              <h3> Registreren</h3>
+                          </div>
+                      </div>
+                      <div>
+                          <div class="row">
+                              <mat-form-field class="example-full-width"  (keyup)="changeUserInput()">
+                                  <label><i class="fa fa-user fa-lg" aria-hidden="true"> </i>&nbsp;&nbsp; Gebruikersnaam   </label>
+                                  <input matInput type="text" name="username" [(ngModel)]="newUsername">
+                              </mat-form-field>
+                          </div>
+                          <div class="row">
+                              <mat-form-field class="example-full-width" (keydown)="changePassInput()">
+                                  <label><i id="newPass" class="fa fa-key fa-lg" aria-hidden="true"> </i>&nbsp;&nbsp; Wachtwoord </label>
+                                  <input matInput type="password"  name="password" [(ngModel)]="newPassword">
+                              </mat-form-field>
+                          </div>
+                          <div class="row">
+                              <mat-form-field class="example-full-width" (keydown)="changePassInput()">
+                                  <label><i id="checkPass" class="fa fa-key fa-lg" aria-hidden="true"> </i>&nbsp;&nbsp; Wachtwoord </label>
+                                  <input matInput type="password"  name="password" [(ngModel)]="checkPassword">
+                              </mat-form-field>
+                          </div>
+                      </div>
+                      <div class="modal-footer center-items" align="center">
+                          <button class="btn btn-primary" (click)=" addUser()"><i class="fa fa-plus" aria-hidden="true"> </i> Registreren</button>
+                      </div>
+                </div>
               <div class="col-md-3"></div>
-             </div>
+              </div>
+           </div>
         </form>
         <video playsinline autoplay loop muted id="video-background">
           <source src="../../assets/video/Holiday lights.mp4" type="video/mp4"/>

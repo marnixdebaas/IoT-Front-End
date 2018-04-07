@@ -35,16 +35,15 @@ export class AppService {
 
         return this.http.get('http://' + this.apiUrl + '/sensor/getAllSensorData').map((res: SensorData[]) => res);
     }
+
     public getBetweenDates(date1, date2, hours): Observable<SensorData[]> {
         let sensorData: SensorData[] = [];
         return this.http.get('http://' + this.apiUrl + '/sensor/getBetweenDates/' + date1 + '/' + date2 + '/' + hours).map((data: SensorData[]) => data);
     }
 
-
-
-    public getUser(): Observable<User> {
+    public getUser(username, password): Observable<User> {
         let user: User;
 
-        return this.http.get('http://' + this.apiUrl + '/sensor/getUser').map((res: User) => res);
+        return this.http.get('http://' + this.apiUrl + '/sensor/getUser/'+username +'/' +password).map((res: User) => res);
     }
 }

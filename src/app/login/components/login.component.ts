@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AppService } from '../../services/appservice.service';
 import { User } from '../../users/classes/user.class';
 
+
 @Component({
   selector: 'app-login-component',
   templateUrl: './login.component.html',
@@ -15,6 +16,13 @@ export class LoginComponent implements OnInit {
     public password: string;
     public user: User;
 
+    public userToggle: boolean;
+    public newUsername: string;
+    public newPassword: string;
+    public checkPassword: string;
+
+    public admin: boolean;
+
     //
     constructor(private route: Router, private apiService: AppService) {
         //
@@ -24,27 +32,27 @@ export class LoginComponent implements OnInit {
         this.user = new User();
         this.username = '';
         this.password = '';
-        //this.apiService.getUsers();
-        this.apiService.getUser().subscribe((data: any) => {
-            // Formatting weird timestamp date to normal angular date
-            this.user.username = data.reponse[0].Name;
-            this.user.password = data.reponse[0].Password;
-        });
+        this.userToggle = false;
+
     }
 
     loginClicked($event) {
         const user = document.getElementById('user');
         const pass = document.getElementById('pass');
-        if( this.user.username === this.username && this.user.password === this.password ) {
-            this.route.navigate(['graphs']);
-        } else if (this.user.username === this.username) {
-            pass.style.color = 'red';
-        } else if (this.user.password === this.password) {
-            user.style.color = 'red';
-        } else {
-            user.style.color = 'red';
-            pass.style.color = 'red';
-        }
+        this.apiService.getUser(this.username, this.password).subscribe((data: any)  => {
+            if(data.response.role === 'admin') {
+                this.admin = true;
+                this.route.navigate(['graphs']);
+            }
+            else if(data.response.role === 'user'){
+                this.admin = false;
+                this.route.navigate(['graphs']);
+            }else{
+                user.style.color = 'red';
+                pass.style.color = 'red';
+            }
+        });
+
     }
 
     changeUserInput() {
@@ -54,6 +62,25 @@ export class LoginComponent implements OnInit {
     changePassInput() {
       const pass = document.getElementById('pass');
       pass.style.color = 'white';
+    }
+    toggleNewUser() {
+      this.userToggle = true;
+    }
+    addUser($event) {
+        if (this.newPassword === this.checkPassword) {
+            // api call
+
+            // this.userToggle = false;
+            // this.newUsername = '';
+            // this.newPassword = '';
+            // this.checkPassword = '';
+        } else {
+            event.preventDefault();
+            const newPass = document.getElementById('newPass');
+            const checkPass = document.getElementById('checkPass');
+            newPass.style.color = 'red';
+            checkPass.style.color = 'red';
+        }
     }
 
 }

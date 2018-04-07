@@ -68,11 +68,11 @@ export class GraphComponent implements OnInit {
         this.isVisibleAll = false;
 
 
-        const firstDate = new Date('2018-03-29 11:57:52.374').toDateString();
-        const lastDate = new Date().toDateString();
-        var dateDifference: number = Date.parse(lastDate) - Date.parse(firstDate);
+        const firstDate = new Date('2018-03-29 11:57:52.374');
+        const lastDate = new Date();
+        var dateDifference: number = Date.parse(lastDate.toDateString()) - Date.parse(firstDate.toString());
         let diffInHours: number = dateDifference / 1000 / 60 / 60;
-        this.apiService.getBetweenDates(firstDate,lastDate, diffInHours).subscribe((data: any) => {
+        this.apiService.getBetweenDates(firstDate, lastDate, diffInHours).subscribe((data: any) => {
           // Formatting weird timestamp date to normal angular date
           this.graphDataAll = data.response;
           for (var d = 0; d < this.graphDataAll[0].series.length; d ++) {
@@ -95,7 +95,7 @@ export class GraphComponent implements OnInit {
         if(diffInHours < 0) {
             return;
         } else {
-            this.apiService.getBetweenDates(this.fromDate, this.toDate, diffInHours).subscribe((data: any) => {
+            this.apiService.getBetweenDates(new Date(this.fromDate), new Date(this.toDate), diffInHours).subscribe((data: any) => {
                 // Formatting weird timestamp date to normal angular date
                 this.graphData = data.response
                 for (var d = 0; d < this.graphData[0].series.length; d ++) {
