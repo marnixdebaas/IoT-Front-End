@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
 export class AppService {
     public user: User;
     public headers: any;
-    public apiUrl: string = '37.97.180.203:1833';
+    public apiUrl: string = 'localhost:1833';
 
     //
     constructor(private http: HttpClient) {
@@ -45,5 +45,11 @@ export class AppService {
         let user: User;
 
         return this.http.get('http://' + this.apiUrl + '/sensor/getUser/'+username +'/' +password).map((res: User) => res);
+    }
+
+    public newUser(username, password): Observable<User>{
+        let user: User;
+
+        return this.http.post('http://' + this.apiUrl + '/sensor/newUser/'+username +'/' +password, null).map((res: User) => res);
     }
 }

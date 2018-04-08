@@ -67,13 +67,15 @@ export class LoginComponent implements OnInit {
       this.userToggle = true;
     }
     addUser($event) {
+        console.log('test')
+        console.log(this.newPassword)
         if (this.newPassword === this.checkPassword) {
-            // api call
-
-            // this.userToggle = false;
-            // this.newUsername = '';
-            // this.newPassword = '';
-            // this.checkPassword = '';
+            this.apiService.newUser(this.newUsername, this.newPassword).subscribe((data:any) => {
+                console.log(data.response.saved)
+                if(data.response.saved == 'successfully'){
+                    this.userToggle = false;
+                }
+            })
         } else {
             event.preventDefault();
             const newPass = document.getElementById('newPass');
