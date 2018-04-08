@@ -39,15 +39,35 @@ export class LoginComponent implements OnInit {
         this.sessionLoad();
     }
 
+    //session data never expires if value is 0
     sessionSave(expired: number = 0)
     {
-      this.session.set(this.sessionKey, { name: this.username, pwd: this.password }, expired, 's');
+      this.session.set(this.sessionKey, { username: this.username, password: this.password }, expired, 's');
     }
 
     sessionLoad()
     {
-      this.username = JSON.stringify(this.session.get(this.sessionKey));
-      //this.username = JSON.stringify(this.username);//
+      var jUser = this.session.get(this.sessionKey);
+
+      if (jUser != null)
+      {
+        this.username = jUser.username;
+        this.password = jUser.password;
+
+        this.apiService.getUser(this.username, this.password).subscribe((data: any)  =>
+        {
+          if(data.response.role === 'admin')
+          {
+            this.admin = true;
+            this.route.navigate(['graphs']);
+          }
+          else if(data.response.role === 'user')
+          {
+            this.admin = false;
+            this.route.navigate(['graphs']);
+          }
+        });
+      }
     }
 
     loginClicked($event) {
@@ -57,18 +77,17 @@ export class LoginComponent implements OnInit {
             if(data.response.role === 'admin') {
                 this.admin = true;
                 this.route.navigate(['graphs']);
-                //this.sessionSave();
+                this.sessionSave();
             }
             else if(data.response.role === 'user'){
                 this.admin = false;
                 this.route.navigate(['graphs']);
-                //this.sessionSave();
+                this.sessionSave();
             }else{
                 user.style.color = 'red';
                 pass.style.color = 'red';
             }
         });
-
     }
 
     changeUserInput() {
