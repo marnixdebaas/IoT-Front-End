@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from '../../services/appservice.service';
 import { User } from '../../users/classes/user.class';
+import { LocalStorageService, SessionStorageService, LocalStorage, SessionStorage } from 'angular-web-storage';
 
 
 @Component({
@@ -11,7 +12,6 @@ import { User } from '../../users/classes/user.class';
 })
 
 export class LoginComponent implements OnInit {
-
     public username: string;
     public password: string;
     public user: User;
@@ -24,9 +24,11 @@ export class LoginComponent implements OnInit {
     public admin: boolean;
 
     //
-    constructor(private route: Router, private apiService: AppService) {
+    constructor(private route: Router, private apiService: AppService, public local: LocalStorageService, public session: SessionStorageService) {
         //
     }
+
+    sessionKey = 'value';
 
     ngOnInit() {
         this.user = new User();
@@ -34,6 +36,18 @@ export class LoginComponent implements OnInit {
         this.password = '';
         this.userToggle = false;
 
+        this.sessionLoad();
+    }
+
+    sessionSave(expired: number = 0)
+    {
+      this.session.set(this.sessionKey, { name: this.username, pwd: this.password }, expired, 's');
+    }
+
+    sessionLoad()
+    {
+      this.username = JSON.stringify(this.session.get(this.sessionKey));
+      //this.username = JSON.stringify(this.username);//
     }
 
     loginClicked($event) {
@@ -43,10 +57,12 @@ export class LoginComponent implements OnInit {
             if(data.response.role === 'admin') {
                 this.admin = true;
                 this.route.navigate(['graphs']);
+                //this.sessionSave();
             }
             else if(data.response.role === 'user'){
                 this.admin = false;
                 this.route.navigate(['graphs']);
+                //this.sessionSave();
             }else{
                 user.style.color = 'red';
                 pass.style.color = 'red';
