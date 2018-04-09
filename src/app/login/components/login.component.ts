@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
     public username: string;
     public password: string;
     public user: User;
+    public userSession;
 
     public userToggle: boolean;
     public newUsername: string;
@@ -28,8 +29,6 @@ export class LoginComponent implements OnInit {
         //
     }
 
-    sessionKey = 'value';
-
     ngOnInit() {
         this.user = new User();
         this.username = '';
@@ -42,13 +41,13 @@ export class LoginComponent implements OnInit {
     //session data never expires if value is 0
     sessionSave(expired: number = 0)
     {
-      this.session.set(this.sessionKey, { username: this.username, password: this.password }, expired, 's');
+      this.session.set(this.userSession, { username: this.username, password: this.password }, expired, 's');
     }
 
     sessionLoad()
     {
-      var jUser = this.session.get(this.sessionKey);
-
+      //get data from session and check if data is not null
+      var jUser = this.session.get(this.userSession);
       if (jUser != null)
       {
         this.username = jUser.username;
