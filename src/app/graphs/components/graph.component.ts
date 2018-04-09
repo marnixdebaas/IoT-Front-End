@@ -17,6 +17,7 @@ import moment = require('moment');
 export class GraphComponent implements OnInit {
 
     // The options for the graphs
+    public admin: boolean;
     public single: any[];
     public standdata: any[];
     public datausage: any[];

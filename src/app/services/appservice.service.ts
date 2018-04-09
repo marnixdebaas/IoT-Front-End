@@ -50,6 +50,6 @@ export class AppService {
     public newUser(username, password): Observable<User>{
         let user: User;
 
-        return this.http.post('http://' + this.apiUrl + '/sensor/newUser/'+username +'/' +password, null).map((res: User) => res);
+        return this.http.post('http://' + this.apiUrl + '/sensor/newUser', {username:username, password:password}).map((res: User) => res);
     }
 }

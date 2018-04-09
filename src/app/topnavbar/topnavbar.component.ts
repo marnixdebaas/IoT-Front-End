@@ -1,5 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginComponent} from '../login/components/login.component';
 
 @Component({
     selector: 'app-top-nav-bar',

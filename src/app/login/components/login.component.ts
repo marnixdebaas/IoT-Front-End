@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
         const pass = document.getElementById('pass');
         this.apiService.getUser(this.username, this.password).subscribe((data: any)  => {
             if(data.response.role === 'admin') {
-                this.admin = true;
+                this.admin
                 this.route.navigate(['graphs']);
             }
             else if(data.response.role === 'user'){
@@ -67,13 +67,13 @@ export class LoginComponent implements OnInit {
       this.userToggle = true;
     }
     addUser($event) {
-        console.log('test')
-        console.log(this.newPassword)
         if (this.newPassword === this.checkPassword) {
             this.apiService.newUser(this.newUsername, this.newPassword).subscribe((data:any) => {
                 console.log(data.response.saved)
                 if(data.response.saved == 'successfully'){
                     this.userToggle = false;
+                }else if(data.response.saved == 'unsuccessfully'){
+                    alert('Username already exists');
                 }
             })
         } else {
