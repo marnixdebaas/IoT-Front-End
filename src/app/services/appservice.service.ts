@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { User } from '../user.class';
 import { SensorData } from '../sensordata/classes/sensordata.class';
 import 'rxjs/add/operator/map';
+import {Log} from '../log/classes/log.class';
 
 @Injectable()
 export class AppService {
@@ -51,5 +52,9 @@ export class AppService {
         let user: User;
 
         return this.http.post('http://' + this.apiUrl + '/sensor/newUser', {username:username, password:password}).map((res: User) => res);
+    }
+
+    public getLogs():Observable<Log>{
+        return this.http.get('http://' + this.apiUrl + '/sensor/getLogs').map((res: Log) => res);
     }
 }

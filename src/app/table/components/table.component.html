@@ -15,13 +15,13 @@
             <!-- Name Column -->
             <ng-container matColumnDef="time">
                 <mat-header-cell *matHeaderCellDef> Tijd </mat-header-cell>
-                <mat-cell *matCellDef="let SensorData"> {{SensorData.timestamp | date: 'dd/MM/yyyy hh:MM:ss'}} </mat-cell>
+                <mat-cell *matCellDef="let Log"> {{Log.timestamp | date: 'dd/MM/yyyy hh:MM:ss'}} </mat-cell>
             </ng-container>
 
             <!-- Value Column -->
             <ng-container matColumnDef="data">
-                <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
-                <mat-cell *matCellDef="let SensorData"> {{SensorData.data}} </mat-cell>
+                <mat-header-cell *matHeaderCellDef> User </mat-header-cell>
+                <mat-cell *matCellDef="let Log"> {{Log.name}} </mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

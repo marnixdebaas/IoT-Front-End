@@ -19,6 +19,9 @@ export class TopNavBarComponent implements OnInit {
     public graphsActive: boolean = false;
     public tableActive: boolean = false;
     public infoActive: boolean = false;
+    public admin: boolean = false;
+    public userSession: any;
+
 
     // public layoutCore: LayoutCore;
 
@@ -31,6 +34,9 @@ export class TopNavBarComponent implements OnInit {
     }
 
     ngOnInit() {
+        var jUser = this.session.get(this.userSession)
+        if(jUser.username === 'superadmin')
+            this.admin = true;
         if(this.active === 1) {
             this.graphsActive = true;
             this.tableActive = false;

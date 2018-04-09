@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AppService } from '../../services/appservice.service';
 import { User } from '../../users/classes/user.class';
 import { SessionStorageService } from 'angular-web-storage';
+import swal from 'sweetalert2';
 
 
 @Component({
@@ -58,12 +59,10 @@ export class LoginComponent implements OnInit {
           if(data.response.role === 'admin')
           {
             this.admin = true;
-            this.route.navigate(['graphs']);
           }
           else if(data.response.role === 'user')
           {
             this.admin = false;
-            this.route.navigate(['graphs']);
           }
         });
       }
@@ -106,8 +105,17 @@ export class LoginComponent implements OnInit {
                 console.log(data.response.saved)
                 if(data.response.saved == 'successfully'){
                     this.userToggle = false;
+                    swal(
+                        'Gebruiker aangemaakt',
+                        'veel plezier',
+                        'success'
+                        )
                 }else if(data.response.saved == 'unsuccessfully'){
-                    alert('Username already exists');
+                    swal(
+                        'Gebruikersnaam niet beschikbaar',
+                        'probeer opnieuw!',
+                        'error'
+                    )
                 }
             })
         } else {
