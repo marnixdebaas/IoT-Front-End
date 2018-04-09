@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from '../../services/appservice.service';
 import { User } from '../../users/classes/user.class';
-import { LocalStorageService, SessionStorageService, LocalStorage, SessionStorage } from 'angular-web-storage';
+import { SessionStorageService } from 'angular-web-storage';
 
 
 @Component({
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     public admin: boolean;
 
     //
-    constructor(private route: Router, private apiService: AppService, public local: LocalStorageService, public session: SessionStorageService) {
+    constructor(private route: Router, private apiService: AppService, public session: SessionStorageService) {
         //
     }
 
