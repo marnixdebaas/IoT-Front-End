@@ -4,7 +4,7 @@
       <a class="navbar-brand" style="color: #fff; font-weight: bold;"> Meterkast Project</a>
     </div>
     <ul class="nav navbar-nav">
-      <li ><a style="color: #fff; font-weight: bold;" href="login"><i class="fa fa-user" aria-hidden="true"></i> Login</a></li>
+      <li><a style="color: #fff; font-weight: bold;" role="button" (click)="logoutClick($event)"><i class="fa fa-user" aria-hidden="true"> </i> Uitloggen</a></li>
       <li [ngClass]="{'active': graphsActive}"><a style="color: #fff; font-weight: bold;" role="button"  (click)="graphsClick($event)"><i class="fa fa-line-chart" aria-hidden="true"> </i> Grafieken</a></li>
       <li [ngClass]="{'active': tableActive}"><a style="color: #fff; font-weight: bold;" role="button" (click)="tableClick($event)"><i class="fa fa-table" aria-hidden="true"> </i> Tabellen</a></li>
       <li [ngClass]="{'active': infoActive}"><a style="color: #fff; font-weight: bold;" role="button" (click)="infoClick($event)"><i class="fa fa-info" aria-hidden="true"> </i> Info</a></li>

@@ -102,7 +102,7 @@ export class GraphComponent implements OnInit {
                     this.graphData[0].series[d].name = moment(this.graphData[0].series[d].name).format('MM/DD/YYYY H:mm');
                 }
                 this.cdr.detectChanges();
-                this.kWhDates = this.graphDataAll[0].series[4].value;
+                this.kWhDates = this.graphData[0].series[4].value;
                 this.loading = false;
                 this.isVisible = true;
             });
