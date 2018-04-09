@@ -1,6 +1,7 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginComponent} from '../login/components/login.component';
+import { SessionStorageService } from 'angular-web-storage';
 
 @Component({
     selector: 'app-top-nav-bar',
@@ -25,7 +26,7 @@ export class TopNavBarComponent implements OnInit {
      * Constructor
      * @param {CoreService} private core [description]
      */
-    constructor(private route: Router) {
+    constructor(private route: Router, public session: SessionStorageService) {
         //
     }
 
@@ -47,6 +48,11 @@ export class TopNavBarComponent implements OnInit {
 
     toggleSidebar() {
         //
+    }
+
+    logoutClick($event) {
+      this.session.clear();
+      this.route.navigate(['login']);
     }
 
     graphsClick($event) {

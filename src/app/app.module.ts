@@ -17,6 +17,7 @@ import { InfoComponent } from './info/components/info.component';
 import { LoginComponent } from './login/components/login.component';
 import { TopNavBarComponent } from './topnavbar/topnavbar.component';
 import { AppService } from './services/appservice.service';
+import { AngularWebStorageModule } from 'angular-web-storage';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { AppService } from './services/appservice.service';
     FormsModule,
     ReactiveFormsModule,
     MatTableModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularWebStorageModule
   ],
   providers: [AppService],
   bootstrap: [AppComponent]
